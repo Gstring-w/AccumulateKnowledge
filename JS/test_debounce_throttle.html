@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1" />
+    <title>throttle&debounce</title>
+    <style>
+      #container {
+        width: 100%;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        background-color: #444;
+        font-size: 30px;
+      }
+      .normal,
+      .throttle,
+      .debounce {
+        height: 100px;
+        background-color: #444;
+        font-size: 0px;
+      }
+      span {
+        display: inline-block;
+        margin: 10px 1px;
+        height: 80px;
+        width: 2px;
+        background-color: #fff;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">鼠标滑动区域</div>
+    <button id="button">点击取消debounce</button>
+    <h4>normal</h4>
+    <div class="normal"></div>
+    <h4>throttle</h4>
+    <div class="throttle"></div>
+    <h4>debounce</h4>
+    <div class="debounce"></div>
+
+    <script src="./underscore.js"></script>
+    <script>
+      // 测试
+      var container = document.getElementById("container");
+      var normalBox = document.getElementsByClassName("normal")[0];
+      var throttleBox = document.getElementsByClassName("throttle")[0];
+      var debounceBox = document.getElementsByClassName("debounce")[0];
+      var normalStr = "",
+        throttleStr = "",
+        debounceStr = "";
+      var count = 0;
+
+      var throttleStrFunc = () => {
+        throttleStr += `<span></span>`;
+        throttleBox.innerHTML = throttleStr;
+      };
+
+      var debounceStrFunc = () => {
+        debounceStr += `<span></span>`;
+        debounceBox.innerHTML = debounceStr;
+      };
+      var normalfunc = () => {
+        count++;
+        if (count === 250) {
+          count = 0;
+          // normalBox.innerHTML = '';
+          throttleStr = "";
+          normalStr = "";
+          debounceStr = "";
+        }
+        normalStr += `<span></span>`;
+        normalBox.innerHTML = normalStr;
+        throttleStr += `<span style='background:#444'></span>`;
+        debounceStr += `<span style='background:#444'></span>`;
+      };
+
+      var setUseAction = _.throttle(throttleStrFunc, 60);
+      var setDebounce = _.debounce(debounceStrFunc, 60,true);
+
+      container.addEventListener("mousemove", function() {
+        setUseAction();
+        setDebounce();
+        normalfunc();
+      });
+
+      document.getElementById("button").addEventListener("click", function() {
+        setUseAction.cancel();
+      });
+    </script>
+  </body>
+</html>
