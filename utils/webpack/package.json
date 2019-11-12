@@ -1,0 +1,17 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "> 基于一种类似事件的方式",
+  "main": "SomeWebpackPlugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}

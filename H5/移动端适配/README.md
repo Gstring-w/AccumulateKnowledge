@@ -27,7 +27,6 @@
 ```JS
 // web环境
 window.devicePixelRatio
-
 ```
 ```CSS
 // web环境css
