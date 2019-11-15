@@ -90,10 +90,51 @@ compiler.plugin('compile',(params)=>{
 })
 
 // 构建Compilation 对象，它包含了一次构建过程中的所以数据，也就是说一次构建过程对应一个compilation实例。触发任务点compilation 和this-compilation
+
+// 创建compilation对象
+class Compiler extends Tapable{
+    newCompilation(params){
+        const compilation = this.createCompilation();
+        compilation.fileTimestamps = this.fileTimestamps;
+        compilation.contextTimestamps = this.contextTimestamps;
+        compilation.name = this.name;
+        compilation.records = this.records;
+        compilation.compilationDependencies = params.compilationDependencies;
+        this.applyPlugins("this-compilation", compilation, params);
+        this.applyPlugins("compilation", compilation, params);
+        return compilation;
+    }
+}
+// 这里为什么会有this-compilation 和 compilation 2个任务点？
+// 根子编译器有关，compiler通过createChildCompiler方法创建子编译器，子编译器会复制compiler实例的任务点
+// compilation会被子编译器复制，this-compilation不会被复制
 ```
 - modules 和 chunks 的生成阶段
+> 先解析项目中所有的modules，再生成chunks
+
+   - modules解析
+   > 创建实例，loaders应用和依赖收集
+   - chunks生成
+   > 找到chunks所需的modules
+   
+    chunks 生成算法
+    1. webpack先将entry的module生成一个chunk
+    2. 再从module依赖列表，将依赖的module也加入chunk
+    3. 如果依赖module是一个动态引入的依赖，则会根据这个module创建一个新的chunk，继续遍历依赖
+    4. 重复上面的过程，直到得到所有的 chunks
+
+
+此时make任务点触发，SingleEntryPlugin会执行
 
 - 文件生成阶段
+
+这个阶段会根据chunks生成文件
+
+模板hash更新
+
+模板渲染chunk
+
+生成文件
 
 
 
