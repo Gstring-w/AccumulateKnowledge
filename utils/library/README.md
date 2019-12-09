@@ -50,3 +50,17 @@ buf = iconv.encode("Sample input string", 'GBK');
 // Check if encoding is supported 
 iconv.encodingExists("us-ascii")
 ```
+
+## IntersectionObserver 接口 
+> 提供了一种异步观察目标元素与其祖先元素或顶级文档视窗（viewport) 交叉状态的方法，祖先元素与视窗（viewport) 被称为根（root）
+ 
+兼容性不太好
+
+polyfill：
+npm: <a href="https://www.npmjs.com/package/intersection-observer">IntersectionObserver polyfill</a>
+
+应用场景：
+1. 页面滚动时懒加载
+2. 无限下拉
+3. 检测某些广告元素的曝光情况来做相关的数据统计
+4. 检测用户的滚动行为是否达到了目标元素位置来实现一些交互逻辑（比如视频元素滚动到隐藏位置时暂停播放）

@@ -28,3 +28,13 @@ ref.addEventListener('focusout', () => {
 ```
 
 3. hoist-non-react-statics
+
+
+
+4. h5中的contentEditable属性在ios不兼容情况
+在可编辑的div下
+```css
+div *{
+    -webkit-user-select:text
+}
+```

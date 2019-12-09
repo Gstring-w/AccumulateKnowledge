@@ -18,3 +18,9 @@ node.js 自带的toString()方法不支持gbk
 == iconv-lite ==
 
 Buffer 常用操作
+
+
+## 消息队列
+> 抢票，商品秒杀
+
+

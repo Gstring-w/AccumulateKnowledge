@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin:0px;
+        }
+        li{
+            list-style: none;
+            height: 100px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li id='firstItem'>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li id='lastItem'>20</li>
+    </ul>
+    <script>
+        function handleObserver(entries){
+            entries.forEach(entry=>{
+                console.log(entry.target.id)
+            })
+        }
+        const observer = new IntersectionObserver(handleObserver)
+        observer.observe(firstItem);
+        observer.observe(lastItem)
+    </script>
+</body>
+</html>

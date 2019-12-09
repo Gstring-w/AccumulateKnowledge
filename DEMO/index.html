@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // function mix(...args){
+      //     if(args.length == 0) return [];
+      //     if(args.length == 1) return args[0];
+      //     return args.reduce((result,arg)=>{
+      //         return result.filter(item=>arg.includes(item))
+      //     })
+      // }
+    //   function Josephus(n, m) {
+    //     var bool = new Array(n + 1);
+    //     bool.fill(true);
+
+    //     var count = 0;
+    //     var i = 1,
+    //       j = 1;
+    //     for (; ; i++) {
+    //       if (bool[i]) {
+    //         j++;
+    //         if (j == m) {
+    //           bool[i] = false;
+    //           j = 0;
+    //           count++;
+    //         }
+    //         if (count == n - 1) {
+    //           console.log(i);
+    //           console.log(bool);
+
+    //           return;
+    //         }
+    //       }
+    //       if (i == n) {
+    //         i = 0;
+    //       }
+    //     }
+    //   }
+
+    //   Josephus(31, 3);
+
+    function Node(val){
+        this.val = val;
+        this.next = null;
+    }
+    var node1 = new Node(1)
+    var node2 = new Node(2)
+    var node3 = new Node(3)
+    var node4 = new Node(4)
+    var node5 = new Node(5)
+    node1.next = node2;
+    node2.next = node3;
+    node3.next = node4;
+    node4.next = node5;
+
+    function reverse(root){
+        if(root.next.next == null){
+            root.next.next = root;
+            return root.next
+        }else {
+            var res = reverse(root.next);
+            root.next.next = root;
+            root.next = null;
+            return res
+        }
+    }
+    console.log(reverse(node1));
+    </script>
+  </body>
+</html>
