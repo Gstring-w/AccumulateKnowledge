@@ -148,3 +148,8 @@ function diffDom(dom1, dom2, diffList, context = null) {
 var arr = [];
 diffDom(dom1, dom2, arr);
 console.log(arr);
+
+
+/**
+ * 也可以扩展为 deepEq lodash中的deepEq函数
+ */
