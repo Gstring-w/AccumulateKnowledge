@@ -143,4 +143,62 @@ function reverse(i){
     }
 }
 ```
-### KMP
+### KMP 字符串匹配算法
+
+#### 暴搜算法
+```js
+function bf(s,p){
+    var i = 0, j = 0, pLen = p.length, sLen = s.length;
+    if(sLen <= pLen) return s == p ? 0 : -1;
+    while(i < sLen && j < pLen){
+        /**
+         * if(s[i] == p[j]){ 相同时 同时向后对比
+         *      i ++;
+         *      j ++;
+         * }else {           不同时 i回溯 j归0
+         *      i = i - (j - 1); 
+         *      j = 0;
+         * }
+         * 以下代码为精简代码
+        */
+        if(s[i++] != p[j++]){
+            i = i - (j - 2) -1;
+            j = 0;
+        }
+    }
+    return j == pLen ? i - j: -1;
+}
+```
+### KMP 优化算法
+
+```JS
+function kmp(s,p){
+    var pLen = p.length, sLen = s.length;
+    if(sLen <= pLen) return s == p ? 0 : -1;
+    // 先求next数组
+    var next = [];
+    next[0] = -1;
+    var j = 0, k = -1;
+    while(j < pLen){
+        if(k == -1 || p[j] == p[k]){
+            next[++j] = ++k;
+        }else {
+            k = next[k];
+        }
+    }
+
+    // 匹配
+    var i = 0, j = 0;
+    while(i < sLen && j < pLen){
+        if(j == -1 || s[i] == p[j]){
+            i++;
+            j++;
+        }else {
+            j = next[j]
+        }
+    }
+
+    return j == pLen ? i - j : -1;
+}
+```
+
