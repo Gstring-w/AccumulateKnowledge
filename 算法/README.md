@@ -201,4 +201,3 @@ function kmp(s,p){
     return j == pLen ? i - j : -1;
 }
 ```
-
