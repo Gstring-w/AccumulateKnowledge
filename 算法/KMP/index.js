@@ -6,14 +6,14 @@ function ViolentMatch(s, p) {
     sLen = s.length;
   while (i < sLen && j < pLen) {
     if (s[i++] != p[j++]) {
-      i = i - (j - 2) - 1;
+      i -= j - 1;
       j = 0;
     }
   }
   return j == pLen ? i - j : -1;
 }
 
-console.log(ViolentMatch("BBC ABCDAB ABCDABCDABDE", "ABCDABD"));
+console.log(ViolentMatch("BBC ABCDABABCDABCDABDE", "ABCDABD"));
 
 // KMP 求next数组
 function KMP(s, p) {
@@ -46,4 +46,4 @@ function KMP(s, p) {
   }
   return j == pLen ? i - j : -1;
 }
-console.log(KMP("BBC ABCDAB ABCDABCDABDE", "ABCDABD"));
+console.log(KMP("BBC ABCDABABCDABCDABDE", "ABCDABD"));

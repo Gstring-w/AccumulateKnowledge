@@ -31,8 +31,3 @@ function count_sort(arr,k){
 const arr = [3,2,3,9,8,5,6,8,1,1,1,0];
 
 console.log(count_sort1(arr,10))
-
-
-/**
- * 给定n个在
- */

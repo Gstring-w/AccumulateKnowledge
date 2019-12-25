@@ -1,3 +1,6 @@
+/**
+ * 插入排序
+ */
 function insert_sort(arr){
     var i
     for(var j = 1; j < arr.length; j++){
