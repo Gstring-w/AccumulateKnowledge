@@ -64,3 +64,6 @@ npm: <a href="https://www.npmjs.com/package/intersection-observer">IntersectionO
 2. 无限下拉
 3. 检测某些广告元素的曝光情况来做相关的数据统计
 4. 检测用户的滚动行为是否达到了目标元素位置来实现一些交互逻辑（比如视频元素滚动到隐藏位置时暂停播放）
+
+## timeage.js
+> 自动更新离现在时间的间隔

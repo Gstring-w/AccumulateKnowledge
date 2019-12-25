@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var N = 4;
+      var V = 5;
+      var c = [0, 1, 2, 3, 4];
+      var w = [0, 2, 4, 4, 5];
+
+      console.log(max1());
+
+      function max1() {
+        var f = new Array(V + 1).fill(0);
+        for (var i = 1; i <= N; i++) {
+            for(var j = c[i]; j <= V; j ++){
+                f[j] = Math.max(f[j],f[j - c[i]] + w[i])
+            }
+        }
+      }
+    </script>
+  </body>
+</html>
