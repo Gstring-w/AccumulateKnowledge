@@ -83,38 +83,38 @@ var debounce = function(func,wait,immediate){
     return debounceCore
 }
 
-// var throttle = function(func,wait,options={}){
-//     if(!options.leading && !options.trading) options = {};
-//     var context,timer,args,previous = 0,results;
+var throttle = function(func,wait,options={}){
+    if(!options.leading && !options.trading) options = {};
+    var context,timer,args,previous = 0,results;
 
-//     var later = function (){
-//         previous = options.leading ? 0 : new Date().getTime();
-//         timer = null;
-//         results = func.apply(context,args);
-//         if(timer) context = args = null;
-//     }
+    var later = function (){
+        previous = options.leading ? 0 : new Date().getTime();
+        timer = null;
+        results = func.apply(context,args);
+        if(timer) context = args = null;
+    }
 
-//     var throttleCore = function(){
-//         var now = new Date().getTime();
-//         if (!previous && !options.leading) previous = now;
-//         var remaing = wait - (now - previous);
-//         context = this;
-//         args = arguments;
-//         if(remaing <= 0 && remaing >= wait){
-//             if(timer) clearTimeout(timer);
-//             previous = now;
-//             result =  func.apply(context,args);
-//             if(timer) context = args = null;
-//         }else if( !options.trading && !timer){
-//             timer = setTimeout(later,remaing);
-//         }
-//         return results  
-//     }
-//     throttleCore.cancel = function(){
-//         clearTimeout(timer);
-//         timer = null;
-//         previous = 0;
-//     }
-//     return throttleCore
-// }
+    var throttleCore = function(){
+        var now = new Date().getTime();
+        if (!previous && !options.leading) previous = now;
+        var remaing = wait - (now - previous);
+        context = this;
+        args = arguments;
+        if(remaing <= 0 && remaing >= wait){
+            if(timer) clearTimeout(timer);
+            previous = now;
+            result =  func.apply(context,args);
+            if(timer) context = args = null;
+        }else if( !options.trading && !timer){
+            timer = setTimeout(later,remaing);
+        }
+        return results  
+    }
+    throttleCore.cancel = function(){
+        clearTimeout(timer);
+        timer = null;
+        previous = 0;
+    }
+    return throttleCore
+}
 

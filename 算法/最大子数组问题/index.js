@@ -74,9 +74,8 @@ function search_max(arr, l, r) {
     return [mid_l, mid_r, mid_max];
   }
 }
-// var arr = [13,-3,-25,20,-3,-16,-23,18,20,-7,12, -5,-22,15,-4,7];
-var arr = [-11, -3, -23, -10, -19, -1];
-console.log(search_max(arr, 0, arr.length - 1));
+// var arr = [-11, -3, -23, -10, -19, -1];
+// console.log(search_max(arr, 0, arr.length - 1));
 
 /**
  *  解析
@@ -88,23 +87,44 @@ console.log(search_max(arr, 0, arr.length - 1));
  * 因为1，2子问题都是求最大子数组，和原题一样，因此只有递归就可以，关键是跨越中点的
  */
 
-
 /**
  * 动态规划
  */
 
-function find_max(arr){
+function find_max(arr) {
   var max = arr[0];
   var v = [arr[0]];
-  var l,r;
-  for(var i = 1; i< arr.length; i++){
+  var l, r;
+  for (var i = 1; i < arr.length; i++) {
     v[i] = Math.max(arr[i], v[i - 1] + arr[i]);
-    if(arr[i] > v [i - 1] + arr[i]){
+    if (arr[i] > v[i - 1] + arr[i]) {
       l = i;
-    } 
-    if(v[i] > max){
+    }
+    if (v[i] > max) {
       max = v[i];
       r = i;
     }
   }
 }
+
+function dp(arr) {
+  var l,
+    r,
+    res = -Infinity,
+    max = [];
+
+  max[0] = arr[0];
+  for (var i = 1; i < arr.length; i++) {
+    max[i] = Math.max(arr[i], max[i - 1] + arr[i]);
+    if(arr[i] > max[i - 1] + arr[i]){
+      l = i;
+    }
+    if(max[i] > res){
+      res = max[i];
+      r = i;
+    }
+  }
+  return [l,r,res];
+}
+
+var arr = [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7];

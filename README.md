@@ -350,3 +350,26 @@ function divideCore(arr, l, mid, r) {
   return [l, r, r_mid + l_mid];
 }
 ```
+
+```js
+// 动态规划
+function dp(arr) {
+  var l,
+    r,
+    v = [],
+    res;
+  v[0] = arr[0];
+  res = -Infinity;
+  for (var i = 1; i < arr.length; i++) {
+    v[i] = Math.max(arr[i], v[i - 1] + arr[i]);
+    if (arr[i] > v[i - 1] + arr[i]) {
+      l = i;
+    }
+    if (v[i] > res) {
+      res = v[i];
+      r = i;
+    }
+  }
+  return [l, r, res];
+}
+```
