@@ -27,6 +27,4 @@ function merge_sort(arr, l, r) {
   for (i = l, j = 0; i <= r; i++, j++) arr[i] = tmp[j];
 }
 
-var arr = [3, 1, 2, 4, 21, 4, 12];
-console.log(merge_sort(arr, 0, 6));
-console.log(arr);
+
