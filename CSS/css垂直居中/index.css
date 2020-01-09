@@ -1,0 +1,122 @@
+/* base css style */
+.wrapper {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  border: 1px solid #000;
+}
+.item {
+  width: 100px;
+  height: 100px;
+  background-color: #abcdef;
+}
+
+/* 定宽高  宽：100px 高: 100px*/
+/* absolute + 负margin */
+.wrapper1 {
+  position: relative;
+}
+.demo1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+
+/* absolute + margin auto */
+
+.wrapper2 {
+  position: relative;
+}
+.demo2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+
+/* absolute + calc */
+.wrapper3 {
+  position: relative;
+}
+.demo3 {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+
+/* 不定宽高 */
+/* absolute + transform translate */
+.wrapper4 {
+  position: relative;
+}
+.demo4 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* lineheight + text-algin */
+.wrapper5 {
+  line-height: 200px;
+  text-align: center;
+  font-size: 0px;
+}
+.demo5 {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: initial;
+  text-align: left; /* 修正文字 */
+}
+
+/* writing-mode text-align  多一层dom*/
+.wrapper6 {
+  writing-mode: vertical-lr;
+  text-align: center;
+}
+.inner {
+  writing-mode: horizontal-tb;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  background: transparent;
+}
+.demo6 {
+  display: inline-block;
+  margin: auto;
+  text-align: left;
+}
+
+/* css-table */
+.wrapper7 {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.demo7 {
+  display: inline-block;
+}
+
+/* flex */
+.wrapper8 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* grid */
+
+.wrapper9{
+    display: grid;
+}
+.demo9{
+    align-self: center;
+    justify-self: center;
+}
