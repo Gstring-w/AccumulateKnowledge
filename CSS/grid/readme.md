@@ -163,3 +163,74 @@ inline-grid 用于 inline
 
 
 ##### `justify-items` && `align-items` && `place-items`
+
+属性值：
+```css
+.wrapper{
+  display:grid;
+  justify-items: start | end | center | stretch(默认值)
+  align-items: start | end | center | stretch(默认值)
+}
+```
+每个行网格线和列网格线 组成了单元格
+
+改属性表示在单元格中的布局
+
+
+##### `justify-content` && `align-content` && `place-content`
+
+表示整个网格的布局
+
+```css
+.wrapper{
+  display:grid;
+  justify-content:start | end | center | stretch | space-around | space-between | space-evenly(项目与项目之间的间隔相等，和边框之间距离也相等)
+}
+```
+
+##### `grid-auto-rows` && `grid-auto-columns`
+
+对于 grid-template-rows 和 grid-template-columns 没有定义的行，浏览器自动创建多余的宽和高
+
+
+### 项目属性
+
+##### `grid-columns-start` && `grid-columns-end` && `grid-rows-start` && `grid-rows-end`;
+
+定义单元格中4个边分别对应哪根网格线（可以用数字表示，可以使用容器属性上定义的网格线）
+
+```css
+.item{
+  grid-columns-start:2;
+  grid-columns-end:4;
+  grid-rows-start:2;
+  grid-rows-end:2;
+}
+```
+
+== span关键字 ==
+表示跨域了多少个网格
+
+
+== 简写形式 ==
+
+```css
+.item{
+  grid-columns:1 / 2;
+  grid-rows: 1 / 1;
+}
+```
+
+##### `grid-areas`
+ 放在哪个区域
+ 和容器属性 grid-template-areas 连用
+
+
+##### `justify-self` && `align-self` && `place-self`
+
+```css
+.item{
+  justify-self: start | end | center | stretch(默认值)
+  align-self: start | end | center | stretch(默认值)
+}
+```
