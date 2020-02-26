@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script src="./手写promise.js"></script>
+    <script>
+        const pro = new MyPromise((res,rej)=>{
+            console.log(1);
+            res(1111);
+            rej(2222)
+        })
+        console.log
+    </script> -->
+    <!-- <script src="./迭代器.js"></script> -->
+    <!-- <script src="./babel2Generator.js"></script>
+    <script src="./babel2Async.js"></script> -->
+    <script src="./手写promise.js"></script>
+    <script>
+      let p = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          resolve(100);
+        }, 1000);
+      });
+      p.then(
+        function(data) {
+          console.log("成功", data);
+          return 111
+        },
+        function(err) {
+          console.log("失败", err);
+        }
+      ).then(
+        function(data) {
+          console.log("成功", data);
+        },
+        function(err) {
+          console.log("失败", err);
+        }
+      );
+    </script>
+  </body>
+</html>
