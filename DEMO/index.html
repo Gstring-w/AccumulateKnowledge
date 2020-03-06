@@ -7,6 +7,7 @@
     <title>Document</title>
   </head>
   <body>
+    <script src="./index.js"></script>
     <script>
       // function mix(...args){
       //     if(args.length == 0) return [];
@@ -45,32 +46,48 @@
 
     //   Josephus(31, 3);
 
-    function Node(val){
-        this.val = val;
-        this.next = null;
-    }
-    var node1 = new Node(1)
-    var node2 = new Node(2)
-    var node3 = new Node(3)
-    var node4 = new Node(4)
-    var node5 = new Node(5)
-    node1.next = node2;
-    node2.next = node3;
-    node3.next = node4;
-    node4.next = node5;
+    // function Node(val){
+    //     this.val = val;
+    //     this.next = null;
+    // }
+    // var node1 = new Node(1)
+    // var node2 = new Node(2)
+    // var node3 = new Node(3)
+    // var node4 = new Node(4)
+    // var node5 = new Node(5)
+    // node1.next = node2;
+    // node2.next = node3;
+    // node3.next = node4;
+    // node4.next = node5;
 
-    function reverse(root){
-        if(root.next.next == null){
-            root.next.next = root;
-            return root.next
-        }else {
-            var res = reverse(root.next);
-            root.next.next = root;
-            root.next = null;
-            return res
-        }
-    }
-    console.log(reverse(node1));
+    // function reverse(root){
+    //     if(root.next.next == null){
+    //         root.next.next = root;
+    //         return root.next
+    //     }else {
+    //         var res = reverse(root.next);
+    //         root.next.next = root;
+    //         root.next = null;
+    //         return res
+    //     }
+    // }
+    // console.log(reverse(node1));
+    // var class2type = {};
+    // var toString = class2type.toString;
+    // var hasOwn = class2type.hasOwnProperty;
+    // function isPlainObject(obj){
+    //   var Cotr,proto;
+
+    //   if(!obj || toString.call(obj) !== '[object Object]') return false;
+
+    //   proto = Object.getPrototypeOf(obj);
+      
+    //   if(!proto) return true;
+
+    //   Cotr = hasOwn.call(proto,'constructor') && proto.constructor;
+
+    //   return typeof Cotr === 'function' && hasOwn.toString.call(Cotr) === hasOwn.toString.call(Object);
+    // }
     </script>
   </body>
 </html>

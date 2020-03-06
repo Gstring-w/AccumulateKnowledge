@@ -9,3 +9,12 @@
 7. utils工具库的积累
 8. 各种名词的解释
 9. 算法
+
+
+📝一周的收获
+
+【2020 0229-0306】 
+1. CDN原理 【CNAME,DNS】
+2. deepCopy
+3. Promise手写 符合A+
+4. async await 经过babel后的代码
