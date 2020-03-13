@@ -39,6 +39,12 @@
     var Ctor = function(){};
   
     // Create a safe reference to the Underscore object for use below.
+    /**
+     * @param {obj}
+     * 1. obj是通过new出来的，直接返回
+     * 2. 函数的调用不是使用new调用的 返回new调用示例
+     * 3. 使用第二种方式调用的，返回 { _wrapped:obj}
+     */
     var _ = function(obj) {
       if (obj instanceof _) return obj;
       if (!(this instanceof _)) return new _(obj);
@@ -51,6 +57,7 @@
     // (`nodeType` is checked to ensure that `module`
     // and `exports` are not HTML elements.)
     if (typeof exports != 'undefined' && !exports.nodeType) {
+      // 有可能出现  <div id='exports'></div> 这时候就会出现全局变量exports
       if (typeof module != 'undefined' && !module.nodeType && module.exports) {
         exports = module.exports = _;
       }
@@ -165,6 +172,7 @@
     // should be iterated as an array or as an object.
     // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
     // Avoids a very nasty iOS 8 JIT bug on ARM-64. #2094
+    // JS所有的数字存储都是64位浮点  1个符号位 11个指数位 53个数字位   所以js有效精度的范围为 [ -Math.pow(2, 53), Math.pow(2, 53) - 1];
     var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
     var getLength = shallowProperty('length');
     var isArrayLike = function(collection) {
@@ -179,6 +187,7 @@
     // Handles raw objects in addition to array-likes. Treats all
     // sparse array-likes as if they were dense.
     _.each = _.forEach = function(obj, iteratee, context) {
+      // optimizeCb 只是在改变this时，由于call性能比apply好，会做一下性能优化
       iteratee = optimizeCb(iteratee, context);
       var i, length;
       if (isArrayLike(obj)) {
@@ -1319,6 +1328,7 @@
     // Is a given variable an object?
     _.isObject = function(obj) {
       var type = typeof obj;
+      // 判断 function object null
       return type === 'function' || type === 'object' && !!obj;
     };
   
@@ -1443,6 +1453,7 @@
     };
   
     // Run a function **n** times.
+    // 运行一个函数n次，返回一个return值的数组，因为改变了this，使用optimizateCb优化
     _.times = function(n, iteratee, context) {
       var accum = Array(Math.max(0, n));
       iteratee = optimizeCb(iteratee, context, 1);
