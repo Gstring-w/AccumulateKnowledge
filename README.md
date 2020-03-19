@@ -21,3 +21,9 @@
 
 
 [【2020 0309-0316】]("./week/20200309.md")
+
+【2020 0316-0320】
+1. React 源码 【React api [ceateElement,Chilren,Component,createRef], ReactDOM.render,ReactRoot,expirationTime, createUpdate,进入调度队列，调度。
+具体调度，内部维护了一个单向的链表，如果是组件中的setState产生的更新，则react会找到RootFiber，通过RootFiber逐层更新。react内部实现了一个requestIdleCallback】
+2. EventEmitter 【once api 的实现，使用现有的函数，现有的东西，来实现新增的东西】
+3. ES2020
