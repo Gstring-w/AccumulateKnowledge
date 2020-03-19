@@ -1,93 +1,85 @@
-/**
- *  node.js中自带的event
- */
-function EventEmitter() {
-  this._maxListeners = 10;
-  this._events = Object.create(null);
-}
-
-// 向事件队列添加事件
-// prepend为true表示向事件队列头部添加事件
-EventEmitter.prototype.addListener = function (type, listener, prepend) {
-  if (!this._events) {
-    this._events = Object.create(null);
+class EventEmitter {
+  constructor() {
+    this.event_map = {};
   }
-  if (this._events[type]) {
-    if (prepend) {
-      this._events[type].unshift(listener);
-    } else {
-      this._events[type].push(listener);
+  /**
+   *
+   * @param {*} key Event type
+   * @param {*} callback Event callback
+   * @param {*} flag 添加的方向
+   */
+  addListener(key, callback, flag = true) {
+    if (
+      this.event_map[key] &&
+      this.event_map[key].length === EventEmitter.MAX_LISTENERS
+    )
+      throw Error("超过最大时间监听数");
+    if (!this.event_map[key]) {
+      this.event_map[key] = [];
     }
-  } else {
-    this._events[type] = [listener];
-  }
-};
-
-// 移除某个事件
-EventEmitter.prototype.removeListener = function (type, listener) {
-  if (Array.isArray(this._events[type])) {
-    if (!listener) {
-      delete this._events[type]
+    if (flag) {
+      this.event_map[key].push(callback);
     } else {
-      this._events[type] = this._events[type].filter(e => e !== listener && e.origin !== listener)
+      this.event_map[key].unshift(callback);
     }
   }
-};
 
-// 向事件队列添加事件，只执行一次
-EventEmitter.prototype.once = function (type, listener) {
-  const only = (...args) => {
-    listener.apply(this, args);
-    this.removeListener(type, listener);
+  removeListener(key) {
+    if (!this.event_map[key]) return;
+    this.event_map[key] = [];
   }
-  only.origin = listener;
-  this.addListener(type, only);
-};
 
-// 执行某类事件
-EventEmitter.prototype.emit = function (type, ...args) {
-  if (Array.isArray(this._events[type])) {
-    this._events[type].forEach(fn => {
-      fn.apply(this, args);
+  removeAllListener() {
+    this.event_map = Object.create(null);
+  }
+
+  once(key, callback) {
+    var newCallback = (...args) => {
+      var result = callback.call(this, ...args);
+      var list = this.event_map[key];
+      this.event_map[key] = list.filter(item => !item.once && item.key !== key);
+      return result;
+    };
+    newCallback.once = true;
+    newCallback.type = key;
+
+    this.addListener(key, newCallback);
+  }
+
+  emit(key, ...args) {
+    var callList = this.event_map[key];
+    if (callList.length === 0) return;
+    var result = []
+    callList.forEach(item =>{
+      result.push(item.call(this, ...args))
     });
+    return result;
   }
-};
-
-// 设置最大事件监听个数
-EventEmitter.prototype.setMaxListeners = function (count) {
-  this.maxListeners = count;
-};
-
+}
+EventEmitter.MAX_LISTENERS = 10;
 
 const eventEmitter = new EventEmitter();
 
 // 监听器 #1
 const listener1 = function listener1() {
-   console.log('监听器 listener1 执行。');
-}
+  console.log("监听器 listener1 执行。");
+  return 1;
+};
 
 // 监听器 #2
 const listener2 = function listener2() {
-  console.log('监听器 listener2 执行。');
-}
+  console.log("监听器 listener2 执行。");
+  return 2
+};
 
-// 绑定 connection 事件，处理函数为 listener1 
-eventEmitter.addListener('connection', listener1);
+// 绑定 connection 事件，处理函数为 listener1
+eventEmitter.addListener("connection", listener1);
 
 // 绑定 connection 事件，调用一次，处理函数为 listener2
-eventEmitter.once('connection', listener2);
+eventEmitter.once("connection", listener2);
 
-// 处理 connection 事件 
-eventEmitter.emit('connection');
+// 处理 connection 事件
+console.log(eventEmitter.emit("connection"));
 
-// 处理 connection 事件 
-eventEmitter.emit('connection');
-
-
-
-
-
-/**
- * 实现EventEmitter
- */
-
+// 处理 connection 事件
+console.log(eventEmitter.emit("connection"));
