@@ -11,7 +11,7 @@
  - 期望职位：前端开发
 
 # 个人能力
-1. 阅读过```React```，了解```batchUpdate```,```reactScheduler```内部原理；
+1. 阅读过```React```源码，了解```batchUpdate```,```reactScheduler```内部原理；
 2. 掌握```Promise```，并可以手写符合```promise/A+```的代码，以及```async await```和```generator+co```；
 3. 掌握```http```,```https```,协议规范，了解```TCP/IP```，滑动窗口，拥塞控制，慢启动算法等；
 4. 熟练掌握```JavaScript```，JS执行机制，原型链，OOP等；
