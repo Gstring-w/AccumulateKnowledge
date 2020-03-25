@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 对象属性的遍历顺序
+      var demo = {};
+      demo.name = "name";
+      demo.age = "age";
+      demo[0] = 0;
+      demo[1] = 1;
+      demo[2] = 2;
+
+      for (var prop in demo) {
+        console.log(demo[prop]);
+      }
+
+
+
+
+
+
+      function Foo(ele, pro) {
+        for (var i = 0; i < ele; i++) {
+          this[i] = `${ele}`;
+        }
+        for (var j = 0; j < pro; j++) {
+          this[`pro${j}`] = `pro${j}`;
+        }
+      }
+
+      var foo1 = new Foo(100, 20);
+    </script>
+  </body>
+</html>
