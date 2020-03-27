@@ -27,3 +27,30 @@
 // const arr = [1,2,3];
 // arr.push(4,4,5,6,6);
 // console.log(arr)
+
+// function LazyMan(name) {
+//   console.log("i am " + name);
+//   return new lazy();
+// }
+
+// lazy.prototype.sleep = time => {
+//   return new Promise(res => {
+//     setTimeout(() => {
+//       res(time);
+//       console.log(`等待了${time / 1000}秒`);
+//     }, time);
+//   });
+// };
+
+// LazyMan('name').sleep(1000).sleep(1000);
+
+function reverse(num, res = []) {
+  if (num.length !== 0) {
+    res.push(num.pop());
+    return reverse(num, res.slice(0));
+  } else {
+    return res.slice(0);
+  }
+}
+
+console.log(reverse([1, 2, 3, 4]));

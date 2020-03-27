@@ -14,7 +14,7 @@ javascript: (function SpyOn() {
     text.contenteditable = true;
     text.setAttribute("id", "JS_AlipayJSBridge_TEXT");
     text.value =
-      "{\nwActionSheet: {\n\tcode: '10000',\n\tdata:{\n\t\titem: '个体工商户营业执照'\n\t\t}},\nsChooseImage: {\n\tcode: '10000',\n\tdata: {\n\t\tpaths: ['https://private-images.shouqianba.com/47/1571880164788279--47d3481b77803a11f63badc70ceb6a30.jpg?Expires=1574395694&OSSAccessKeyId=LTAIf4w9oUgn1uKg&Signature=rMJIBs2PRWkFGUi06gQzMEXhdlU%3D']\n\t\t}\n\t},\nsDatePicker: {\n\tcode: '10000',\n\tdata:{\n\t\tresult: '20121101'\n\t\t}},\n}";
+      "{\nwActionSheet: {\n\tcode: '10000',\n\tdata:{\n\t\titem: '个体工商户营业执照'\n\t\t}},\nsChooseImage: {\n\tcode: '10000',\n\tdata: {\n\t\tpaths: ['']\n\t\t}\n\t},\nsDatePicker: {\n\tcode: '10000',\n\tdata:{\n\t\tresult: '20121101'\n\t\t}},\n}";
     document.body.append(text);
     var btn =
       typeof JS_AlipayJSBridge_BUTTON == "undefined"
