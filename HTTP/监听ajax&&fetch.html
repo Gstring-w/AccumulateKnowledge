@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script>
+      (function() {
+        function Queue(){
+          
+        }
+
+        const fetchQueue = [];  // 获得一个队列
+        function findCookieId(tag) {
+          const cookie = {};
+          document.cookie.split(";").forEach(i => {
+            const arr = i.split("=");
+            cookie[arr[0].trim()] = arr[1];
+          });
+          return cookie[tag];
+        }
+
+        function uuid() {
+          var s = [];
+          var hexDigits = "0123456789abcdef";
+          for (var i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+          }
+          s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+          s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+          s[8] = s[13] = s[18] = s[23] = "-";
+          var uuid = s.join("");
+          return uuid;
+        }
+
+        // 为了找到传递的参数
+        const { send } = XMLHttpRequest.prototype;
+        XMLHttpRequest.prototype.send = function(...prams) {
+          this.__data__ = prams[0];
+          this.__time__ = new Date().getTime();
+          return send.call(this, ...prams);
+        };
+
+        function recordHttpLog() {
+          // 监听ajax的状态
+          function ajaxEventTrigger(event) {
+            var ajaxEvent = new CustomEvent(event, { detail: this });
+            window.dispatchEvent(ajaxEvent);
+          }
+          var oldXHR = window.XMLHttpRequest;
+          function newXHR() {
+            var realXHR = new oldXHR();
+            // 这里没有监听ajaxLoadStart这个事件了，无法获得post传递的值
+            realXHR.addEventListener(
+              "loadstart",
+              function() {
+                ajaxEventTrigger.call(this, "ajaxLoadStart");
+              },
+              false
+            );
+            realXHR.addEventListener(
+              "loadend",
+              function() {
+                ajaxEventTrigger.call(this, "ajaxLoadEnd");
+              },
+              false
+            );
+            return realXHR;
+          }
+
+          window.XMLHttpRequest = newXHR;
+
+          window.addEventListener("ajaxLoadEnd", function(e) {
+            const params = {
+              logId: uuid(),
+              cookieId: findCookieId("IFCHANGE_TOB"),
+              uri: e.detail.responseURL,
+              status: e.detail.status,
+              requestBodyJsonString: e.detail.__data__,
+              accessTime: new Date().getTime() - e.detail.__time__
+            };
+            // console.log(params);
+            // fetch('/collect', { body: JSON.stringify(params), method: 'POST' }).then(res => {
+            //   console.log(res);
+            // });
+            fetchQueue.push(params);
+          });
+        }
+        recordHttpLog();
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
