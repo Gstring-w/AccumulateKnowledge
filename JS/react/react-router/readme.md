@@ -84,3 +84,51 @@ function Demo() {
 
 export default withRouter(Demo);
 ```
+
+##### 和`Vue`对比
+
+- `Vue`使用的是静态配置
+
+`Vue`通过配置文件，事先定义好路由
+
+- `React`使用的是动态配置
+
+`React`通过正则比对路由，来决定是否渲染`React组件`，属于在运行 js 时配置路由
+
+##### 使用`react--router-dom`来实现路由守卫
+
+- 监听路由变化
+
+通过`Route`和`withRouter`拿到的`history`对象中存在的`listen`
+
+```javascript
+import React from "react";
+
+class ListenRoute extends React.Component {
+  componentDidMout() {
+    const {
+      history: { listen },
+    } = this.props;
+
+    this.unListen = listent((...args) => {
+      console.log(args);
+    });
+  }
+
+  compoentWillUnmount() {
+    this.unListen();
+  }
+
+  render() {
+    return null;
+  }
+}
+```
+
+listen 传入一个函数，该函数会在每次路由变化时运行该函数，但是不能做到阻止进入下一个路由；并返回一个函数，执行该函数，便会取消监听函数
+
+
+- 阻止路由跳转
+
+通过`Route`和`withRouter`拿到的`history`对象中存在的`block`
+
