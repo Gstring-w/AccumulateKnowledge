@@ -84,3 +84,34 @@ function Demo() {
 
 export default withRouter(Demo);
 ```
+
+### 关于 props 中的对象
+
+1. history
+2. location
+3. match
+
+## 其他组件
+
+1. Link
+
+渲染成 a 标签，但是点击不会刷新页面来进行跳转
+
+- to： 字符串 对象{pathname,hash,search}
+- stric
+- senstive
+
+2. NavLink
+
+- activeClassName
+- activeStyle
+- exact
+- senstive
+- stric
+
+3. Redirect
+
+无刷新跳转
+
+- form
+- to
