@@ -85,33 +85,48 @@ function Demo() {
 export default withRouter(Demo);
 ```
 
-### 关于 props 中的对象
+##### 和`Vue`对比
 
-1. history
-2. location
-3. match
+- `Vue`使用的是静态配置
 
-## 其他组件
+`Vue`通过配置文件，事先定义好路由
 
-1. Link
+- `React`使用的是动态配置
 
-渲染成 a 标签，但是点击不会刷新页面来进行跳转
+`React`通过正则比对路由，来决定是否渲染`React组件`，属于在运行 js 时配置路由
 
-- to： 字符串 对象{pathname,hash,search}
-- stric
-- senstive
+##### 使用`react--router-dom`来实现路由守卫
 
-2. NavLink
+- 监听路由变化
 
-- activeClassName
-- activeStyle
-- exact
-- senstive
-- stric
+通过`Route`和`withRouter`拿到的`history`对象中存在的`listen`
 
-3. Redirect
+```javascript
+import React from "react";
 
-无刷新跳转
+class ListenRoute extends React.Component {
+  componentDidMout() {
+    const {
+      history: { listen }
+    } = this.props;
 
-- form
-- to
+    this.unListen = listent((...args) => {
+      console.log(args);
+    });
+  }
+
+  compoentWillUnmount() {
+    this.unListen();
+  }
+
+  render() {
+    return null;
+  }
+}
+```
+
+listen 传入一个函数，该函数会在每次路由变化时运行该函数，但是不能做到阻止进入下一个路由；并返回一个函数，执行该函数，便会取消监听函数
+
+- 阻止路由跳转
+
+通过`Route`和`withRouter`拿到的`history`对象中存在的`block`
