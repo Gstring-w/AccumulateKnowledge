@@ -9,21 +9,25 @@
   <body>
     <a id="a">测试</a>
     <script>
+      function guess(n) {
+        var num = 1702766719;
+        if (n == num) return 0;
+        if (n > num) return -1;
+        if (n < num) return 1;
+      }
+      var guessNumber = function (n) {
+        var l = 1;
+        var r = n;
+        while (l < r) {
+          var mid = (l + r + 1) >> 1;
+          if (guess(mid) > 0) l = mid;
+          else if (guess(mid) < 0) r = mid - 1;
+          else return mid;
+        }
+        return l;
+      };
 
-      // function foo(){
-      //   console.log('foo 执行')
-      //   setTimeout(()=>{
-      //     foo();
-      //   },0)
-      // }
-
-
-      // function foo(){
-      //   console.log('foo 执行')
-      //   Promise.resolve().then(foo)
-      // }
-      // foo();
-
+      console.log(guessNumber(2126753390));
     </script>
   </body>
 </html>
