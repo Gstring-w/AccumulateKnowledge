@@ -43,14 +43,56 @@
 // };
 
 // LazyMan('name').sleep(1000).sleep(1000);
-
-function reverse(num, res = []) {
-  if (num.length !== 0) {
-    res.push(num.pop());
-    return reverse(num, res.slice(0));
-  } else {
-    return res.slice(0);
+var isValidSudoku = function (board) {
+  var row = [];
+  var col = [];
+  var box = [];
+  for (var i = 0; i < 9; i++) {
+    row[i] = [];
+    col[i] = [];
+    box[i] = [];
   }
-}
 
-console.log(reverse([1, 2, 3, 4]));
+  for (var i = 0; i < 9; i++) {
+    for (var j = 0; j < 9; j++) {
+      var item = board[i][j];
+      if (item === ".") continue;
+      if (row[i][item] === undefined) {
+        row[i][item] = item;
+      } else {
+        console.log(box, row, col);
+        return false;
+      }
+
+      if (col[j][item] === undefined) {
+        col[j][item] = item;
+      } else {
+        console.log(box, row, col);
+        return false;
+      }
+
+      if (box[parseInt(i / 3) * 3 + parseInt(j / 3)][item] === undefined) {
+        box[parseInt(i / 3) * 3 + parseInt(j / 3)][item] = item;
+      } else {
+        console.log(box, row, col);
+        return false;
+      }
+    }
+  }
+  console.log(box, row, col);
+  return true;
+};
+
+console.log(
+  isValidSudoku([
+    ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+    [".", "9", "8", ".", ".", ".", ".", "6", "."],
+    ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+    ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+    ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+    [".", "6", ".", ".", ".", ".", "2", "8", "."],
+    [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+    [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+  ])
+);

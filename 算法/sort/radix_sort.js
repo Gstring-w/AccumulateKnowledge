@@ -17,7 +17,6 @@ function radix_sort(arr, d) {
         radix[idx] = +arr[j];
       }
     }
-    console.log(radix)
     for (var k = 0; k < 10; k++) {
       if (radix[k] !== "-") {
         if (typeof radix[k] == "string") {
