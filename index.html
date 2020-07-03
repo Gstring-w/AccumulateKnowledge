@@ -9,24 +9,31 @@
   <body>
     <a id="a">测试</a>
     <script>
-      var isMatch = function (s, p) {
-        if (p.length === 0) return s.length === 0;
-        if (p[1] == "*") {
-          return (
-            isMatch(s, p.slice(2)) ||
-            (s.length !== 0 &&
-              (s[0] == p[0] || p[0] == ".") &&
-              isMatch(s.slice(1), p))
-          );
-        } else {
-          return (
-            s.length !== 0 &&
-            (s[0] == p[0] || p[0] == ".") &&
-            isMatch(s.slice(1), p.slice(1))
-          );
-        }
+      var permutation = function (s) {
+        if (s.length < 2) return [s];
+        var len = s.length;
+        var visited = [];
+        var res = [];
+
+        var dfs = function (s, path, visited) {
+          if (path.length === len) return res.push(path.join(""));
+
+          for (var i = 0; i < len; i++) {
+            if (visited[i]) {
+              continue;
+            }
+
+            visited[i] = true;
+            path.push(s[i]);
+            dfs(s, path, visited);
+            path.pop();
+            visited[i] = false;
+          }
+        };
+        dfs(s, [], visited);
+        return [...new Set([...res])];
       };
-      console.log(isMatch("aa", ".*"));
+      console.log(permutation("aab"));
     </script>
   </body>
 </html>
