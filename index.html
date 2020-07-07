@@ -9,31 +9,22 @@
   <body>
     <a id="a">测试</a>
     <script>
-      var permutation = function (s) {
-        if (s.length < 2) return [s];
-        var len = s.length;
-        var visited = [];
-        var res = [];
-
-        var dfs = function (s, path, visited) {
-          if (path.length === len) return res.push(path.join(""));
-
-          for (var i = 0; i < len; i++) {
-            if (visited[i]) {
-              continue;
-            }
-
-            visited[i] = true;
-            path.push(s[i]);
-            dfs(s, path, visited);
-            path.pop();
-            visited[i] = false;
-          }
-        };
-        dfs(s, [], visited);
-        return [...new Set([...res])];
+      var search = function (nums, target) {
+        if (nums.length === 0) return false;
+        var l = 0;
+        var r = nums.length - 1;
+        if (nums[l] === target) return true;
+        while (nums[l] == nums[r] && r > l) r--, l++; // 去除首尾相等的值
+        debugger;
+        while (l < r) {
+          if (target === nums[l] || target === nums[r]) return true
+          if (target > nums[l]) l++;
+          else if (target < nums[r]) r--;
+          else return false;
+        }
+        return false;
       };
-      console.log(permutation("aab"));
+      console.log(search([1, 3], 3));
     </script>
   </body>
 </html>
