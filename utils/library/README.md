@@ -67,3 +67,9 @@ npm: <a href="https://www.npmjs.com/package/intersection-observer">IntersectionO
 
 ## timeage.js
 > 自动更新离现在时间的间隔
+
+
+## mac-screen-capture-permissions
+> mac系统权限
+
+## 
