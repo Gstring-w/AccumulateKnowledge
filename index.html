@@ -7,46 +7,6 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="text" id="input" />
-    <script>
-      const inputDom = document.getElementById("input");
-
-      inputDom.onchange = (e) => {
-        console.log("onchange", e.target.value);
-      };
-      inputDom.oninput = (e) => {
-        console.log("oninput", e, e.target.value);
-        // setTimeout(() => {
-        //   e.target.value  = 
-        //   inputDom.dispatchEvent(e);
-        // }, 1000);
-      };
-
-      const obj = {
-        bubbles: true,
-        cancelBubble: false,
-        cancelable: false,
-        composed: true,
-        currentTarget: null,
-        data: "1",
-        dataTransfer: null,
-        defaultPrevented: false,
-        detail: 0,
-        eventPhase: 0,
-        inputType: "insertText",
-        isComposing: false,
-        isTrusted: true,
-        returnValue: true,
-        sourceCapabilities: null,
-        timeStamp: 6205.8799999940675,
-        type: "input",
-        view: null,
-        which: 0,
-      };
-      setTimeout(() => {
-        const event = new InputEvent("input");
-        inputDom.dispatchEvent(event);
-      }, 1000);
-    </script>
+    <script></script>
   </body>
 </html>
